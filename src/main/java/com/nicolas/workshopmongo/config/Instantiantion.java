@@ -3,6 +3,7 @@ package com.nicolas.workshopmongo.config;
 import com.nicolas.workshopmongo.domain.Post;
 import com.nicolas.workshopmongo.domain.User;
 import com.nicolas.workshopmongo.dto.AuthorDTO;
+import com.nicolas.workshopmongo.dto.CommentDTO;
 import com.nicolas.workshopmongo.respositories.PostRepository;
 import com.nicolas.workshopmongo.respositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,13 @@ public class Instantiantion implements CommandLineRunner {
 
         Post post1 = new Post(null, simpleDateFormat.parse("21/03/2018"), "Partiu viagem", "Vou viajar para SP. Abraços!", new AuthorDTO(maria));
         Post post2 = new Post(null, simpleDateFormat.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(maria));
+
+        CommentDTO c1 = new CommentDTO("Boa viagem mano!", simpleDateFormat.parse("21/03/2018"), new AuthorDTO(alex));
+        CommentDTO c2 = new CommentDTO("Aproveite!", simpleDateFormat.parse("22/03/2018"), new AuthorDTO(bob));
+        CommentDTO c3 = new CommentDTO("Tenha um ótimo dia!", simpleDateFormat.parse("23/03/2018"), new AuthorDTO(alex));
+
+        post1.getComments().addAll(Arrays.asList(c1, c2));
+        post2.getComments().addAll(Arrays.asList(c3));
 
         postRepository.saveAll(Arrays.asList(post1, post2));
 
